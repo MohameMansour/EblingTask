@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">EblingTask</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="sort">
+        <item>Sort by</item>
+        <item>popularity</item>
+        <item>revenue</item>
+        <item>release_date</item>
+    </string-array>
+
+</resources>
