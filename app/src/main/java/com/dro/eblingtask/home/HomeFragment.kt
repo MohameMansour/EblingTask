@@ -66,6 +66,20 @@ class HomeFragment : BaseFragment() , TrendMovieAdapter.OnMovieClickListener, Ad
 
        // paging
 
+        trend_movie_recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if (!trend_movie_recyclerview.canScrollVertically(1)) {
+                    Toast.makeText(requireContext(), "Last", Toast.LENGTH_LONG).show()
+
+                    viewModel.getTrendMovies("popularity.desc", page++)
+
+                }
+
+            }
+        })
 
     }
 
@@ -109,7 +123,12 @@ class HomeFragment : BaseFragment() , TrendMovieAdapter.OnMovieClickListener, Ad
 //    }
 
     override fun onMovieClicked(result: Result) {
-
+        val bottomSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_lay, null)
+        view.movie_name.text = result.title
+        view.movie_rate.text = result.overview
+        bottomSheet.setContentView(view)
+        bottomSheet.show()
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
